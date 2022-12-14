@@ -9,13 +9,13 @@ describe('GuessNumberGame', function () {
 
     describe('Deployment', function () {
         it('Deploys', async function () {
-            const GuessNumberGame = await ethers.getContractFactory('GuessNumberGame');
             accounts = await ethers.getSigners();
             endTime = Math.floor(Date.now() / 1000) + interval;
 
             let { chainId } = await ethers.provider.getNetwork(); // Get the chainId we are using in hardhat
             const rrpAddress = airnodeProtocol.AirnodeRrpAddresses[chainId]; // Get the AirnodeRrp address for the chainId
 
+            const GuessNumberGame = await ethers.getContractFactory('GuessNumberGame');
             guessNumberGameContract = await GuessNumberGame.deploy(endTime, interval, rrpAddress);
             expect(await guessNumberGameContract.deployed()).to.be.ok;
         });
