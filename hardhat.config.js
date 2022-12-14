@@ -11,7 +11,7 @@ module.exports = {
         url: process.env.INFURA_GOERLI_API_URL,
       },
     },
-    ropsten: {
+    goerli: {
       url: process.env.INFURA_GOERLI_API_URL,
       accounts: { mnemonic: process.env.MNEMONIC },
     },
