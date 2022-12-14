@@ -34,6 +34,7 @@ npx hardhat test
 #### 4. 備註
 
 有分支 v2，開彩決果是透過 Airnode 取得隨機數，但尚未成功
+
 已有有透過 AWS, dxFeed, ChainAPI, API3(Airnode) 實際部屬一個能接收鏈下 API 的 Requester 合約在 goerli 鏈上，線上調用也有成功取得隨機數
 - requester contract: 0xcf52a2ebd2c8ef4cc531ebaeda2d8629f56c4ee7 
 - sponsor wallet: 0x24f436D655c09Bc7920Bea7e461d7A2Da3713c2C
@@ -42,4 +43,5 @@ npx hardhat test
 - endpointId: 0x070b496e7aa9aff248b803c7c3ac6a55f52893ae14f0d841c9ccf3b205ca5865
 
 但是在 hardhat 裡一直沒法成功實現這個 Requester 功能，還在努力嘗試中
+
 所以目前 master 分支版本的取得隨機數比較不安全，等我 v2 嘗試成功後會在 merge 進去
