@@ -4,19 +4,19 @@ const airnodeProtocol = require('@api3/airnode-protocol');
 const airnodeAdmin = require('@api3/airnode-admin');
 
 describe('GuessNumberGame', function () {
-    let guessNumberGameContract, accounts, nextWeek;
+    let guessNumberGameContract, accounts, endTime;
     let interval = 86400;
 
     describe('Deployment', function () {
         it('Deploys', async function () {
             const GuessNumberGame = await ethers.getContractFactory('GuessNumberGame');
             accounts = await ethers.getSigners();
-            nextWeek = Math.floor(Date.now() / 1000) + 86400;
+            endTime = Math.floor(Date.now() / 1000) + interval;
 
             let { chainId } = await ethers.provider.getNetwork(); // Get the chainId we are using in hardhat
             const rrpAddress = airnodeProtocol.AirnodeRrpAddresses[chainId]; // Get the AirnodeRrp address for the chainId
 
-            guessNumberGameContract = await GuessNumberGame.deploy(nextWeek, 86400, rrpAddress);
+            guessNumberGameContract = await GuessNumberGame.deploy(endTime, interval, rrpAddress);
             expect(await guessNumberGameContract.deployed()).to.be.ok;
         });
 
@@ -74,9 +74,9 @@ describe('GuessNumberGame', function () {
             expect(pot).to.equal(ethers.utils.parseEther('0.002'));
         });
 
-        it('End time should push back 1 week from original end time', async function () {
-            let weekAfter = nextWeek + 86400;
-            expect(await guessNumberGameContract.endTime()).to.equal(weekAfter);
+        it('End time should push back 1 day from original end time', async function () {
+            let roundAfter = endTime + interval;
+            expect(await guessNumberGameContract.endTime()).to.equal(roundAfter);
         });
     });
 });
